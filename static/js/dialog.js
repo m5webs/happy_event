@@ -16,7 +16,7 @@ const dialog_texts = [
 			`
 			Listen.
 			If you can't hear anything, please, contact the administrator.
-			I will just wait.
+			I can wait.
 			Whenever you are ready, click here to continue.
 			`,
 		callback: null,
@@ -101,6 +101,7 @@ const dialog_texts = [
 			`,
 		callback: null
 	},
+	// index = 9
 	{
 		type: "dialog",
 		text:
@@ -139,7 +140,15 @@ const dialog_texts = [
 		text:
 			`
 			Excellent job!
-			Remember, all answers here are hiding that word.
+			`,
+		callback: null
+	},
+	{
+		type: "dialog",
+		text:
+			`
+			Let me tell you a secret:
+			Most answers here aim to hide that name.
 			`,
 		callback: null
 	},
@@ -158,7 +167,7 @@ const dialog_texts = [
 			`
 			What order should the broken screens follow? (insert a number):
 			`,
-		callback: (box) => question_prompt(box, ["?"], "apple", -2),
+		callback: (box) => question_prompt(box, ["f6ad17cc37d54b96e74c00c41ab1da1242ecd956da333e88059e304749e4363bb52b71a1da76ef45fe0b16663a970bbdd9c3f49f89a6b6104f678ab42504c80b"], "wordoftheday", -1),
 	},
 	{
 		type: "dialog",
@@ -166,7 +175,10 @@ const dialog_texts = [
 			`
 			Who is the leader hidden in the clock?
 			`,
-		callback: (box) => question_prompt(box, ["?"], "angels", -2),
+		callback: (box) => question_prompt(box, [
+			"a87d659cc92895ad0a8b3585453cb7972d3f7ed63d8136496e42a00adcf0bec4390b94fa28b67d9e2f0066ea93578670f8dc061f868aa36dbaead9a9bb567503",
+			"ab2a021c74207c846c68ca4d99d1a67c63ac44a451c95b1403f50ed26bf360a509b9c7b472dbc5fc176ed43b2adf7f35fc473f2477e39f7a13463fdaeb8273de",
+		], "angels", -1),
 	},
 	{
 		type: "dialog",
@@ -174,7 +186,7 @@ const dialog_texts = [
 			`
 			What order should your options follow? (insert a number):
 			`,
-		callback: (box) => question_prompt(box, ["?"], "interface", -2),
+		callback: (box) => question_prompt(box, ["de3638e5d243dfcc6ccdf90d366ca7bcadc1afa6c1b59a42a3f1927193e92416e0162da2efdff198e1d6612da19d39fd762eaebaa70ce561cdc0e4d17c050bbf"], "interface", -1),
 	},
 	{
 		type: "dialog",
@@ -182,7 +194,7 @@ const dialog_texts = [
 			`
 			What key guards the undelivered message?
 			`,
-		callback: (box) => question_prompt(box, ["?"], "title_niki", -2),
+		callback: (box) => question_prompt(box, ["10a02207584ec1aac944b91cbc38f5f5340c30187e7b4ef67348196e0b1fc47e4bc3733ab860205f05845b4b6beb742e97e3f5dc8ab7b4b2404be811a9396d7d"], "title_niki", -1),
 	},
 	{
 		type: "dialog",
@@ -308,7 +320,36 @@ function handle_keypress(e) {
 
 // Asynchronous hash function
 function sha512(str) {
+	str = str.toLowerCase();
 	return crypto.subtle.digest("SHA-512", new TextEncoder("utf-8").encode(str)).then(buf => {
 		return Array.prototype.map.call(new Uint8Array(buf), x => (('00' + x.toString(16)).slice(-2))).join('');
 	});
 }
+
+/*
+dear you.
+I fucking hate you.
+I hate you so so so so so so much.
+It's unfucking fair that you just up and left when you KNOW that I would do ANYTHING to even TRY to help you feel better.
+Do you have any idea how I feel not being able to see you?
+Not having anyone to call before I go to bed?
+I can't even fucking open Dragon Quest anymore because it was OUR save file and I don't want to keep playing without you fuck why are you not here.
+
+Please come home
+
+- The girl you left behind
+*/
+
+/*
+kspv fcj.
+m miropbv lhht cvi.
+x lhht cvi hs zc hs zc hs zc byjv.
+xx'z icjbqzmuu uepf ilhh nsb xjwa ie eur aimh lllb nsb ycsd hwea w lsbzs hv occavxrn hd icsc xym is osat fcj jlsa flhiiy.
+rd cvi wecs prf wsih vda p ttis bdx isxrn oqpl hd wls nsb?
+bdx ookmuu prfcci ac resz qimcgi p ud xv pth?
+p qpr'a skiu tjgrwck vdtr kfpkvb fylgi eumbsys qijojwl wi ahg dyy gpzl txpl och p rdr'a kpra hd olse tsonmuu lmavdya mdy miro dvn eys nsb bdx osgi.
+
+wztezs rsts wsts
+
+- ill uxvs mdy ssux iswmur
+*/

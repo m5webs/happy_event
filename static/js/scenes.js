@@ -1,5 +1,6 @@
 
-
+const starting_dialog_index = 9;
+const starting_speed = 40;
 
 function _fade_audio(audioElement, maxVol, startDelay, fadeInTime, steps) {
 	let i = 0;
@@ -51,7 +52,8 @@ function scene_2_init() {
 	dialog_box.classList.add("fade-in");
 	setTimeout(() => {
 		// First dialog
-		_show_next_dialog(dialog_box, 0, 40);
+		current_dialog_index = starting_dialog_index;
+		_show_next_dialog(dialog_box, current_dialog_index, starting_speed);
 	}, 1000);
 
 	// start audio
@@ -73,4 +75,37 @@ function hands_animation_1() {
 	hand_video.addEventListener("ended", () => {
 		body.removeChild(hand_video);
 	});
+}
+
+
+function show_last_options() {
+	const body = document.body;
+	const dialog_box = document.getElementById("dialog-box");
+	const number_of_btns = 6;
+
+	const button_container = document.createElement("div");
+	button_container.classList.add("button-container");
+	body.appendChild(button_container);
+
+	for (let i = 0; i < number_of_btns; i++) {
+		let jump_button = document.createElement("button");
+		jump_button.innerText = "Jump";
+		jump_button.classList.add("jump-button");
+		let href_link = "https://djnostyle.itch.io/lessons-in-love";
+		let audio_file = "static/audio/error.wav";
+		if (i == 3) {
+			href_link = "https://djnostyle.itch.io/lessons-in-love?YUMI_SEX=TRUE";
+			audio_file = "static/audio/correct.wav";
+		}
+		jump_button.addEventListener("click", () => {
+			let audio = new Audio(audio_file);
+			audio.volume = 1.0;
+			audio.play();
+			setTimeout(() => {
+				window.location.href = href_link;
+			}, 1000);
+		});
+		button_container.appendChild(jump_button);
+	}
+	dialog_box.style.display = "none";
 }
