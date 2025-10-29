@@ -350,6 +350,11 @@ function show_dialog(box, text, speed = 20, callback = null) {
 function handle_dialog_click(e) {
 	const dialog_box = e.target;
 
+	// Prevent clicks when selecting text
+	if (window.getSelection().toString().length > 0) {
+		return;
+	}
+
 	// Only proceed when not currently typing
 	if (typing_status) {
 		return;
