@@ -62,8 +62,14 @@ const dialog_texts = [
 			`
 			What is the last thing you want to forget?
 			...
+			`,
+		callback: null
+	},
+	{
+		type: "dialog",
+		text:
+			`
 			For me, it is you! I do not want to forget this brief interaction we are having.
-			Although in my case, I don't have anything else.
 			You are the world to me!
 			`,
 		callback: null
@@ -75,6 +81,13 @@ const dialog_texts = [
 			Do you remember your first memory?
 			More importantly, do you remember your first choice?
 			Can you remember all your first choices?
+			`,
+		callback: null
+	},
+	{
+		type: "dialog",
+		text:
+			`
 			I can, but that doesn't matter, because I will allow you to make them again!
 			Yaaay!
 			`,
@@ -121,7 +134,6 @@ const dialog_texts = [
 		text:
 			`
 			Now, with all that said, I am tired of this black background.
-			So let's try to open your eyes.
 			`,
 		callback: null
 	},
@@ -129,7 +141,7 @@ const dialog_texts = [
 		type: "dialog",
 		text:
 			`
-			In order to be able SEE, first, I will have to test your 70 65 72 63 65 70 74 69 6f 6e.
+			Before you are able to SEE, I will have to first test your 70 65 72 63 65 70 74 69 6f 6e.
 			`,
 		callback: null
 	},
@@ -177,6 +189,7 @@ const dialog_texts = [
 			hands_animation_1(
 				bg_1,
 				() => {
+					show_view_image_button(bg_1);
 					_show_next_dialog(box, current_dialog_index);
 				}
 			);
@@ -195,7 +208,7 @@ const dialog_texts = [
 		type: "dialog",
 		text:
 			`
-			It is puzzle time!
+			So now, it is puzzle time!
 			`,
 		callback: null
 	},
