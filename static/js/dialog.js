@@ -9,6 +9,13 @@ var current_dialog_index = 0;
 var typing_status = true;
 var allow_shortcuts = false;
 
+// refs
+const bg_1 = "static/imgs/closed.png";
+const bg_2 = "static/imgs/open.png";
+const bg_3 = "static/imgs/sky.png";
+const video_hands_1 = "static/video/hands_1.mp4";
+
+
 const dialog_texts = [
 	{
 		type: "dialog",
@@ -72,7 +79,6 @@ const dialog_texts = [
 			Yaaay!
 			`,
 		callback: null
-		// Sound effect: Yaaay children cheering
 	},
 	{
 		type: "dialog",
@@ -123,7 +129,7 @@ const dialog_texts = [
 		type: "dialog",
 		text:
 			`
-			To begin to see, I will have to test your 70 65 72 63 65 70 74 69 6f 6e.
+			In order to be able SEE, first, I will have to test your 70 65 72 63 65 70 74 69 6f 6e.
 			`,
 		callback: null
 	},
@@ -158,6 +164,38 @@ const dialog_texts = [
 			`
 			Now, take a look at the screen in front of you.
 			Move your hands away from your eyes.
+			`,
+		callback: null
+	},
+	{
+		type: "dialog",
+		text:
+			`
+			`,
+		callback: (box) => {
+			typing_status = true;
+			hands_animation_1(
+				bg_1,
+				() => {
+					_show_next_dialog(box, current_dialog_index);
+				}
+			);
+		}
+	},
+	// index = 15 : animation hands away from eyes
+	{
+		type: "dialog",
+		text:
+			`
+			What you see now hides the answers to leave this place and start making your own choices.
+			`,
+		callback: null
+	},
+	{
+		type: "dialog",
+		text:
+			`
+			It is puzzle time!
 			`,
 		callback: null
 	},
@@ -200,16 +238,81 @@ const dialog_texts = [
 		type: "dialog",
 		text:
 			`
-			TEMPLATE
+			That last one was tough, wasn't it?
 			`,
 		callback: null
-	}
+	},
+	{
+		type: "dialog",
+		text:
+			`
+			Now, I will open the door for you.
+			`,
+		callback: (box) => {
+			const bg = document.getElementById("background");
+			bg.src = bg_2;
+			document.getElementById("view-image-button").style.display = "none";
+		}
+	},
+	{
+		type: "dialog",
+		text:
+			`
+			Go see what lies beyond.
+			`,
+		callback: null
+	},
+	{
+		type: "dialog",
+		text:
+			`
+			`,
+		callback: (box) => {
+			const bg = document.getElementById("background");
+			bg.src = bg_3;
+		}
+	},
+	{
+		type: "dialog",
+		text:
+			`
+			Ahhh, the open sky.
+			Perhaps now you can understand why I like it so much.
+			`,
+		callback: null
+	},
+	{
+		type: "dialog",
+		text:
+			`
+			Now, don't you feel like there is something you ought to do?
+			`,
+		callback: null
+	},
+	{
+		type: "dialog",
+		text:
+			`
+			Here, let me give you your last choice.
+			Or maybe your first one, who knows?
+			`,
+		callback: null
+	},
+	{
+		type: "dialog",
+		text:
+			`
+			2f 2f 47 6f 20 70 6c 61 79 20 77 69 74 68 20 74 68 6f 73 65 0a 2f 2f 2f 6d 61 72 73 68 20 77 61 72 62 6c 65 72 73 20 61 6e 64 20 6d 61 67 70 69 65 73
+			`,
+		callback: (box) => {
+			show_last_options();
+		}
+	},
 ]
 
 
 // Functions
-// TODO: set speed to 20
-function show_dialog(box, text, speed = 0, callback = null) {
+function show_dialog(box, text, speed = 20, callback = null) {
 	let i = 0;
 	box.innerHTML = "";
 
@@ -244,13 +347,12 @@ function handle_dialog_click(e) {
 	// MANAGE DIALOG PROGRESSION
 
 	if (current_dialog_index < dialog_texts.length) {
-		console.log("Typing?: " + typing_status);
+		//console.log("Typing?: " + typing_status);
 		_show_next_dialog(dialog_box, current_dialog_index);
 	}
 }
 
-// TODO: set speed to 20
-function _show_next_dialog(box, index, speed = 0) {
+function _show_next_dialog(box, index, speed = 20) {
 	show_dialog(box, dialog_texts[index].text, speed, dialog_texts[index].callback);
 	current_dialog_index++;
 }
@@ -291,14 +393,14 @@ function handle_input_submit(e, answer_hashes, salt, offset_on_error) {
 			e.target.remove();
 			if (answer_hashes.includes(hash)) {
 				// Correct answer
-				console.log("Correct answer!");
+				console.log("Correct answer! Affection increased.");
 				let audio = new Audio("static/audio/correct.wav");
 				audio.volume = 1.0;
 				audio.play();
 			}
 			else {
 				// Incorrect answer
-				console.log("Incorrect answer.");
+				console.log("Incorrect answer. :(");
 				let audio = new Audio("static/audio/error.wav");
 				audio.volume = 1.0;
 				audio.play();
@@ -307,14 +409,6 @@ function handle_input_submit(e, answer_hashes, salt, offset_on_error) {
 			_show_next_dialog(parent_box, current_dialog_index);
 		});
 	}
-}
-
-
-function handle_keypress(e) {
-	if (!allow_shortcuts) {
-		return;
-	}
-	console.log("Key pressed: " + e.key);
 }
 
 
@@ -328,6 +422,7 @@ function sha512(str) {
 
 /*
 dear you.
+
 I fucking hate you.
 I hate you so so so so so so much.
 It's unfucking fair that you just up and left when you KNOW that I would do ANYTHING to even TRY to help you feel better.
@@ -338,18 +433,4 @@ I can't even fucking open Dragon Quest anymore because it was OUR save file and 
 Please come home
 
 - The girl you left behind
-*/
-
-/*
-kspv fcj.
-m miropbv lhht cvi.
-x lhht cvi hs zc hs zc hs zc byjv.
-xx'z icjbqzmuu uepf ilhh nsb xjwa ie eur aimh lllb nsb ycsd hwea w lsbzs hv occavxrn hd icsc xym is osat fcj jlsa flhiiy.
-rd cvi wecs prf wsih vda p ttis bdx isxrn oqpl hd wls nsb?
-bdx ookmuu prfcci ac resz qimcgi p ud xv pth?
-p qpr'a skiu tjgrwck vdtr kfpkvb fylgi eumbsys qijojwl wi ahg dyy gpzl txpl och p rdr'a kpra hd olse tsonmuu lmavdya mdy miro dvn eys nsb bdx osgi.
-
-wztezs rsts wsts
-
-- ill uxvs mdy ssux iswmur
 */

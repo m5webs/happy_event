@@ -147,3 +147,23 @@ body {
 .jump-button:active {
 	background-color: lightcyan;
 }
+
+.view-image-button {
+	background-color: rgba(255, 255, 255, 0.8);
+	border: 2px solid orchid;
+	border-radius: 5px;
+	color: orchid;
+	font-size: 15px;
+	padding: 10px 20px;
+	cursor: pointer;
+	width: 150px;
+	transition: background-color 0.3s ease, opacity 2s linear;
+	position: fixed;
+	right: 15px;
+	top: 15px;
+	z-index: 10;
+}
+
+.view-image-button:active {
+	background-color: lightcyan;
+}

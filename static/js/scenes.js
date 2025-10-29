@@ -1,5 +1,5 @@
 
-const starting_dialog_index = 9;
+const starting_dialog_index = 0;
 const starting_speed = 40;
 
 function _fade_audio(audioElement, maxVol, startDelay, fadeInTime, steps) {
@@ -18,20 +18,16 @@ function _fade_audio(audioElement, maxVol, startDelay, fadeInTime, steps) {
 }
 
 function init() {
-	console.log("Scenes initialized");
+	console.log("USER2 logged in");
+	console.log("Please leave the terminal, do not touch the wires.");
 
 	// hide dialog box
 	const dialog_box = document.getElementById("dialog-box");
 	dialog_box.style.display = "none";
-
-	// add event listeners
-	const body = document.body;
-	body.addEventListener("keypress", handle_keypress);
 }
 
 
 function start_scene(e) {
-	console.log("Scene started");
 	// hide title screen
 	const title_text = document.getElementById("title-text");
 	title_text.removeAttribute("onclick");
@@ -45,7 +41,6 @@ function start_scene(e) {
 
 
 function scene_2_init() {
-	console.log("Scene 2 initialized");
 	// show dialog box
 	const dialog_box = document.getElementById("dialog-box");
 	dialog_box.style.display = "block";
@@ -62,18 +57,25 @@ function scene_2_init() {
 }
 
 
-function hands_animation_1() {
+function hands_animation_1(after_image, callback = null) {
 	const body = document.body;
 
 	const hand_video = document.createElement("video");
-	hand_video.src = "static/video/hands_1.mp4";
+	hand_video.src = video_hands_1;
 	hand_video.playbackRate = 1.8;
 	hand_video.autoplay = true;
 	hand_video.classList.add("hand-video");
 	body.appendChild(hand_video);
 
 	hand_video.addEventListener("ended", () => {
-		body.removeChild(hand_video);
+		const bg = document.getElementById("background");
+		bg.src = after_image;
+		setTimeout(() => {
+			body.removeChild(hand_video);
+		}, 500);
+		if (callback) {
+			callback();
+		}
 	});
 }
 
@@ -108,4 +110,21 @@ function show_last_options() {
 		button_container.appendChild(jump_button);
 	}
 	dialog_box.style.display = "none";
+}
+
+
+function show_view_image_button(img_ref) {
+	const container = document.getElementById("background-container");
+	const button = document.createElement("button");
+	button.id = "view-image-button";
+	button.innerText = "View Image";
+	button.classList.add("view-image-button");
+	button.style.opacity = 0;
+	button.addEventListener("click", () => {
+		window.open(img_ref, "_blank");
+	});
+	container.appendChild(button);
+	setTimeout(() => {
+		button.style.opacity = 0.8;
+	}, 500);
 }
