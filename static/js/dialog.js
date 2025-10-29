@@ -319,6 +319,7 @@ const dialog_texts = [
 			`,
 		callback: (box) => {
 			show_last_options();
+			typing_status = true;
 		}
 	},
 ]

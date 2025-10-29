@@ -109,7 +109,7 @@ function show_last_options() {
 		});
 		button_container.appendChild(jump_button);
 	}
-	dialog_box.style.display = "none";
+	//dialog_box.style.display = "none";
 }
 
 
