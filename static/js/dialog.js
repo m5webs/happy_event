@@ -237,7 +237,11 @@ const dialog_texts = [
 			`
 			What order should your options follow? (insert a number):
 			`,
-		callback: (box) => question_prompt(box, ["de3638e5d243dfcc6ccdf90d366ca7bcadc1afa6c1b59a42a3f1927193e92416e0162da2efdff198e1d6612da19d39fd762eaebaa70ce561cdc0e4d17c050bbf"], "interface", -1),
+		callback: (box) => question_prompt(box, [
+			"de3638e5d243dfcc6ccdf90d366ca7bcadc1afa6c1b59a42a3f1927193e92416e0162da2efdff198e1d6612da19d39fd762eaebaa70ce561cdc0e4d17c050bbf",
+			"45feed0ccf507f0687d8a110a814192ef0e7a84a4d2f77feb21bdc38fa95705cec38b1f8831d61ef58d59b3c255e6f7dc9ca4d862be928ecd9bf3ab17332757d"
+
+		], "interface", -1),
 	},
 	{
 		type: "dialog",
